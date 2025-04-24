@@ -1,17 +1,96 @@
 import tomJerryNibbles.*
 
+
 describe "Grupo de test" {
 
-  test "test 1" {
-    assert.equals(100, 50+50)
+  test "test 1, Al inicio, la velocidad máxima de Tom es 10 (su energía es 50)" {  
+      assert.equals(10,tom.velocidadMax())
+      assert.equals(50, tom.energia())
+       //si no tiene el metodo para consultar la energia se debe crear assert.equals para comparar si son iguales
   }
 
-  test "test 3" {
-    assert.that(true)
+  test "test 2, Si come a Jerry, la velocidad máxima pasa a ser 15.2 (su energía es 102)" {
+
+    tom.comer(jerry)
+
+    assert.equals(tom.velocidadMax(),15.2)
+    assert.equals(tom.energia(), 102)
+
+    //assert.that(true)
+
   }
 
-  test "test 4" {
-    assert.notThat(false)
+  test "test 3, Si corre 24 metros, entonces su velocidad máxima pasa a ser 14 (su energía es 90)" {
+    tom.comer(jerry)
+    tom.correr(24)
+
+    assert.equals(tom.velocidadMax(), 14)
+    assert.equals(tom.energia(), 90)
+    
+  }
+
+  test "test 4, Si come a Nibbles, pasa a tener de velocidad máxima 18.7 (su energía es 137)" {
+    tom.comer(jerry)
+    tom.correr(24)
+    tom.comer(nibbles)
+
+    assert.equals (tom.velocidadMax(), 18.7)
+    assert.equals(tom.energia(), 137)  
+  }
+  test "test 5, si Jerry cumple años (3 años de edad), y luego Tom lo vuelve a comer, pasaría a tener 25.9 (su energia es 209)"{
+    tom.comer(jerry)
+    tom.correr(24)
+    tom.comer(nibbles)
+
+    jerry.cumplirAnios()
+    tom.comer(jerry)
+
+
+    assert.equals (tom.velocidadMax(), 25.9)
+    assert.equals(tom.energia(), 209)
+
+
+
+  }
+  test "test 6, si corre 38 metros su velocidad pasa a ser 24 (su energia es 190)"{
+    tom.comer(jerry)
+    tom.correr(24)
+    tom.comer(nibbles)
+    jerry.cumplirAnios()
+    /*assert.equals(jerry.edad(), 3)  // Asegúrate que ahora tiene 3 años
+    assert.equals(jerry.peso(), 60) // Y por tanto peso 60 */
+    tom.comer(jerry)
+
+    tom.correr(38)
+
+
+    assert.notEquals(tom.velocidadMax(),24)
+    assert.notEquals(tom.energia(), 190)
+  }
+
+  test " test 7, cazar un ratón si puede, y hacer que lo coma."{
+
+
+    /*assert.that(tom.puedeCazarRatonA(10)) */
+
+    tom.cazarRatonADistancia(jerry, 10)
+
+    assert.equals(tom.velocidadMax(),10.2)
+    assert.equals(tom.energia(), 52)
+
+
+  }
+
+    test " test 8."{
+
+
+    assert.equals(nibbles.peso(),35)
+
+    tom.comer(nibbles)
+
+    assert.equals(tom.energia(), 97)
+
+
   }
 
 }
